@@ -30,12 +30,12 @@ export default {
         if (this.areYouSpinUp) {
           this.spinLate = 100
           this.areYouSpinUp = false
-          this.fuckSpin = 'No No No plz Click Me!'
+          this.fuckSpin = 'No No No'
         } else {
           this.spinLate = 1
           this.areYouSpinUp = true
           this.areYouFuck = true
-          this.fuckSpin = 'Fuckyou Stop plz!'
+          this.fuckSpin = 'Fuckyou Stop plz'
         }
       } else {
         this.spinLate = 1000
@@ -47,11 +47,11 @@ export default {
         this.spinLate = 0
         this.areYouSpin = true
         this.areYouSpinDown = true
-        this.fuckSpin = '...ok.Spinup plz'
+        this.fuckSpin = 'OK'
         this.areYouFuck = false
       } else {
         this.spinLate = 2000
-        this.fuckSpin = 'So Good too Slow'
+        this.fuckSpin = 'So Good'
       }
     }
   }
