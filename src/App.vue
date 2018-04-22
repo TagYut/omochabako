@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img id="app__logo" :style="{animationDuration: spinLate + 'ms'}" @click="spinUp" src="./assets/logo.png">
+    <img id="app__logo" :style="{animationDuration: spinLate + 'ms'}" @click="spinUp " src="./assets/logo.png">
     <h2 @click="spinStop">{{ fuckSpin }}</h2>
     <router-view/>
     <tarot></tarot>
@@ -15,6 +15,7 @@ export default {
     return {
       spinLate: 0,
       fuckSpin: '',
+      eraseText: false,
       areYouFuck: false,
       areYouSpin: false,
       areYouSpinUp: false,
@@ -26,23 +27,29 @@ export default {
   },
   methods: {
     spinUp: function () {
-      if (this.areYouSpin) {
-        if (this.areYouSpinUp) {
-          this.spinLate = 100
-          this.areYouSpinUp = false
-          this.fuckSpin = 'No No No'
-        } else {
-          this.spinLate = 1
-          this.areYouSpinUp = true
-          this.areYouFuck = true
-          this.fuckSpin = 'Fuckyou Stop plz'
-        }
+      if (this.eraseText) {
+        this.fuckSpin = ''
+        this.eraseText = false
       } else {
-        this.spinLate = 1000
-        this.areYouSpin = true
+        if (this.areYouSpin) {
+          if (this.areYouSpinUp) {
+            this.spinLate = 100
+            this.areYouSpinUp = false
+            this.fuckSpin = 'No No No'
+          } else {
+            this.spinLate = 1
+            this.areYouSpinUp = true
+            this.areYouFuck = true
+            this.fuckSpin = 'Fuckyou Stop plz'
+          }
+        } else {
+          this.spinLate = 1000
+          this.areYouSpin = true
+        }
       }
     },
     spinStop: function () {
+      this.eraseText = true
       if (this.areYouFuck) {
         this.spinLate = 0
         this.areYouSpin = true
