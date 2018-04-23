@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img id="app__logo" :style="{animationDuration: spinLate + 'ms'}" @click="spinUp " src="./assets/logo.png">
-    <h2 @click="spinStop">{{ fuckSpin }}</h2>
+    <h2 id="app__msg" @click="spinStop">{{ fuckSpin }}</h2>
     <router-view/>
     <tarot></tarot>
   </div>
@@ -83,6 +83,10 @@ export default {
     100% {
       transform: rotate(360deg);
     }
+  }
+  &__msg {
+    height: 0;
+    margin: 0;
   }
 }
 </style>
