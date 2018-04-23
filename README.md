@@ -1,6 +1,6 @@
 # omochabako
 
-> A Vue.js project
+> A Vue.js project めどい！改行！ .
 > buildされたものはDocs/に入っている。root直下index.htmlは（たぶん）srcが参照するテスト用のもの（たぶん）
 
 ## Build Setup
