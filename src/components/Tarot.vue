@@ -29,9 +29,12 @@ export default {
     // ライト
     const light = new THREE.DirectionalLight(0xffffff)
     light.position.set(0, 0, 10)
+    // テクスチャ
+    const loader = new THREE.TextureLoader()
+    const texture = loader.load('../assets/earth.jpg')
     // モデル
-    const geometry = new THREE.BoxGeometry(2, 2, 2)
-    const material = new THREE.MeshStandardMaterial({ color: 0xf00ff0 })
+    const geometry = new THREE.SphereGeometry(2, 16, 16)
+    const material = new THREE.MeshBasicMaterial({map: texture})
     const cube = new THREE.Mesh(geometry, material)
     return {
       msg: 'Welcome to Your Vue.js App',
