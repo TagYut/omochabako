@@ -21,16 +21,17 @@ export default {
     const scene = new THREE.Scene()
     // レンダラ
     const renderer = new THREE.WebGLRenderer()
+    renderer.setClearColor(0xFFFFFFF, 1.0)
     renderer.setSize(600, 300)
     // カメラ
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+    const camera = new THREE.PerspectiveCamera(30, 600 / 300, 0.1, 1000)
     camera.position.z = 5
     // ライト
     const light = new THREE.DirectionalLight(0xffffff)
     light.position.set(0, 0, 10)
     // モデル
     const geometry = new THREE.BoxGeometry(1, 1, 1)
-    const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+    const material = new THREE.MeshStandardMaterial({ color: 0x00fff0 })
     const cube = new THREE.Mesh(geometry, material)
     return {
       msg: 'Welcome to Your Vue.js App',
@@ -59,8 +60,8 @@ export default {
   methods: {
     animate () {
       requestAnimationFrame(this.animate)
-      this.cube.rotation.x += 0.05
-      this.cube.rotation.y += 0.05
+      this.cube.rotation.x += 0.005
+      this.cube.rotation.y += 0.005
       this.renderer.render(this.scene, this.camera)
     }
   }
