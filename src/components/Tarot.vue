@@ -31,7 +31,7 @@ export default {
     light.position.set(0, 0, 10)
     // テクスチャ
     const loader = new THREE.TextureLoader()
-    const texture = loader.load('../assets/earth.jpg')
+    const texture = loader.load('https://tagyut.github.io/omochabako/images/earth.jpg')
     // モデル
     const geometry = new THREE.SphereGeometry(2, 16, 16)
     const material = new THREE.MeshBasicMaterial({map: texture})
