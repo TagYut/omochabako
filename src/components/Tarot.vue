@@ -25,14 +25,11 @@ export default {
   methods: {
     canvasBall: function () {
       var canvas = document.getElementById('canvas')
+      var gl = canvas.getContext('webgl')
       if (canvas.getContext) {
-        var context = canvas.getContext('2d')
-        context.fillRect(20, 40, 50, 100)
-        context.strokeStyle = 'rgb(00,00,255)'
-        context.fillStyle = 'rgb(255,00,00)'
-        context.strokeRect(200, 80, 100, 50)
-        context.arc(150, 75, 60, Math.PI * 1, Math.PI * 2, true)
-        context.fill()
+        gl.viewport(0, 0, canvas.width, canvas.height)
+        gl.clearColor(1, 0, 0, 1)
+        gl.clear(gl.COLOR_BUFFER_BIT)
       }
     }
   }
@@ -58,13 +55,13 @@ canvas {
   &__box {
     border: 2px solid black;
     margin: 0 auto;
-    height: 400px;
+    height: 404px;
     width: 604px;
   }
   &__view {
     border-bottom: 2px solid black;
     margin: 0 auto;
-    height: 300px;
+    height: 302px;
     width: 600px;
   }
   &__input {
