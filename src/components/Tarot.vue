@@ -63,8 +63,8 @@ export default {
   methods: {
     animate () {
       requestAnimationFrame(this.animate)
-      this.cube.rotation.x += 0.05
-      this.cube.rotation.y += 0.05
+      this.cube.rotation.x += 0
+      this.cube.rotation.y += 0.01
       this.renderer.render(this.scene, this.camera)
     }
   }
