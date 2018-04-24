@@ -2,9 +2,7 @@
   <div class="tarot">
     <h1 class="tarot__title">tarot</h1>
     <div class="tarot__box">
-      <div class="tarot__view">
-        <canvas id="canvas" @click="canvasBall">ああああ</canvas>
-      </div>
+      <div class="tarot__view" ref="renderer"></div>
       <div class="tarot__input">
         <p>{{ randam }} をつかって乱数をつくるぞ</p>
         <input v-model="randam" placeholder="ここになんかかきこめ">
@@ -19,46 +17,51 @@ import * as THREE from 'three'
 export default {
   name: 'HelloWorld',
   data () {
+    // シーン
+    const scene = new THREE.Scene()
+    // レンダラ
+    const renderer = new THREE.WebGLRenderer()
+    renderer.setSize(600, 300)
+    // カメラ
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+    camera.position.z = 5
+    // ライト
+    const light = new THREE.DirectionalLight(0xffffff)
+    light.position.set(0, 0, 10)
+    // モデル
+    const geometry = new THREE.BoxGeometry(1, 1, 1)
+    const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+    const cube = new THREE.Mesh(geometry, material)
     return {
       msg: 'Welcome to Your Vue.js App',
-      randam: 'こいつ'
+      randam: 'こいつ',
+      scene: scene,
+      renderer: renderer,
+      camera: camera,
+      light: light,
+      cube: cube
     }
   },
+
+  created () {
+    // === sceneにmodel,light, cameraを追加 ===
+    this.scene.add(this.camera)
+    this.scene.add(this.light)
+    this.scene.add(this.cube)
+  },
+
+  mounted () {
+    // === DOMを追加, animate ===
+    this.$refs.renderer.appendChild(this.renderer.domElement)
+    this.animate()
+  },
+
   methods: {
-    canvasBall: function () {
-      // サイズを指定
-      const width = 600
-      const height = 300
-
-      // レンダラーを作成
-      const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('canvas')
-      })
-      renderer.setPixelRatio(window.devicePixelRatio)
-      renderer.setSize(width, height)
-
-      // シーンを作成
-      const scene = new THREE.Scene()
-
-      // カメラを作成
-      const camera = new THREE.PerspectiveCamera(45, width / height)
-      camera.position.set(0, 0, +1000)
-
-      // 箱を作成
-      const geometry = new THREE.BoxGeometry(400, 400, 400)
-      const material = new THREE.MeshNormalMaterial()
-      const box = new THREE.Mesh(geometry, material)
-      scene.add(box)
-
-      tick()
-
-      // 毎フレーム時に実行されるループイベントです
-      function tick () {
-        box.rotation.y += 0.01
-        renderer.render(scene, camera) // レンダリング
-
-        requestAnimationFrame(tick)
-      }
+    animate () {
+      requestAnimationFrame(this.animate)
+      this.cube.rotation.x += 0.05
+      this.cube.rotation.y += 0.05
+      this.renderer.render(this.scene, this.camera)
     }
   }
 }
